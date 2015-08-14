@@ -9,6 +9,7 @@ namespace LaborathoryControl.Enum
     public enum TextRedactors
     {
         Word,
-        OpenOffice
+        OpenOffice,
+        None
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LaborathoryControl.Enum;
 using Word = Microsoft.Office.Interop.Word;
 using Microsoft.Win32;
+using System.Runtime.InteropServices;
 
 namespace LaborathoryControl.Model
 {
@@ -20,24 +21,40 @@ namespace LaborathoryControl.Model
         {
             data = new List<Data>(values);
             this.calc = calc;
-            WhatsInstaled();
+            _textRedactor = WhatsInstaled();
         }
 
         private TextRedactors WhatsInstaled()
         {
-            RegistryKey microsoft = Registry.LocalMachine.OpenSubKey("Software").OpenSubKey("Microsoft");
-
-            if (microsoft != null)
+            using (RegistryKey microsoft = Registry.LocalMachine.OpenSubKey("Software").OpenSubKey("Microsoft"))
             {
-                RegistryKey word = microsoft.OpenSubKey("Word");
-
-                if (word != null)
+                if (microsoft != null)
                 {
-                    return TextRedactors.Word;
+                    RegistryKey word = microsoft.OpenSubKey("Word");
+
+                    if (word != null)
+                    {
+                        return TextRedactors.Word;
+                    }
                 }
             }
+            string baseKey;
+            if (Marshal.SizeOf(typeof(IntPtr)) == 8) 
+                baseKey = @"SOFTWARE\Wow6432Node\OpenOffice.org\";
+            else
+                baseKey = @"SOFTWARE\OpenOffice.org\";
+            string key = baseKey + @"Layers\URE\1";
 
-            return TextRedactors.OpenOffice;
+            RegistryKey OpenOffice = Registry.CurrentUser.OpenSubKey(key);
+                if (OpenOffice == null)
+                    OpenOffice = Registry.LocalMachine.OpenSubKey(key);
+                string urePath = OpenOffice.GetValue("UREINSTALLLOCATION") as string;
+                if (!string.IsNullOrEmpty(urePath))
+                {
+                    OpenOffice.Close();
+                    return TextRedactors.OpenOffice;
+                }
+            return TextRedactors.None;
         }
 
         public void MakeDocument()
@@ -49,6 +66,12 @@ namespace LaborathoryControl.Model
                         WorkWithMsWord();
                         return;
                     }
+                case TextRedactors.OpenOffice:
+                    {
+                        return;
+                    }
+                default:
+                    return;
             }
         }
 
@@ -292,5 +315,11 @@ namespace LaborathoryControl.Model
             */
             //Close this form.
         }
+
+        private void WorkWithOpenOffice()
+        {
+
+        }
+
     }
 }

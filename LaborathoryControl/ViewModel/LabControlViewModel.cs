@@ -6,6 +6,8 @@ using LaborathoryControl.Model;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
+using OxyPlot;
+using OxyPlot.Series;
 
 namespace LaborathoryControl.ViewModel
 {
@@ -39,6 +41,17 @@ namespace LaborathoryControl.ViewModel
             }
         }
 
+        private PlotModel _Model;
+        public PlotModel Model 
+        { 
+            get { return _Model; }
+            private set 
+            {
+                _Model = value;
+                OnPropertyChanged();
+            } 
+        }
+
         public ICommand StartCommand { get; set; }
         public ICommand GenerateWordDocCommand { get; set; }
         public ICommand CloseCommand { get; set; }
@@ -48,7 +61,6 @@ namespace LaborathoryControl.ViewModel
             _quarterValues = new ObservableCollection<Data>();
             for (int i = 0; i < 20;)
                 QuarterValues.Add(new Data(++i));
-
             StartCommand = new RelayCommand(Start);
             GenerateWordDocCommand = new RelayCommand(GenerateMSWordDoc);
             CloseCommand = new RelayCommand(Close);
@@ -57,6 +69,20 @@ namespace LaborathoryControl.ViewModel
         private void Start()
         {
             Calculation = new Calculation(QuarterValues);
+
+            GetPlotModel();
+        }
+
+        void GetPlotModel()
+        {
+            var series = new LineSeries { Title = "Данные по анализам", MarkerType = MarkerType.Circle };
+            foreach(Data d in QuarterValues)
+            {
+                series.Points.Add(new DataPoint(d.Number, d.Value));
+            }
+            PlotModel tmp = new PlotModel();
+            tmp.Series.Add(series);
+            this.Model = tmp;
         }
 
         private void GenerateMSWordDoc()
