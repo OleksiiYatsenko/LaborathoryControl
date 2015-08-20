@@ -93,7 +93,9 @@
     <Compile Include="Enum\TextRedactors.cs" />
     <Compile Include="Model\Calculation.cs" />
     <Compile Include="Model\Data.cs" />
+    <Compile Include="Model\MSWordWorker.cs" />
     <Compile Include="Model\NotificationEntity.cs" />
+    <Compile Include="Model\OpenOfficeWorker.cs" />
     <Compile Include="Model\TextDocumentWorker.cs" />
     <Compile Include="Model\ValidationEntity.cs" />
     <Compile Include="ViewModel\LabControlViewModel.cs" />
