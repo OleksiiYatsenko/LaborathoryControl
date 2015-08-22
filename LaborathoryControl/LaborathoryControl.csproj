@@ -69,7 +69,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.MvvmLightLibs.5.0.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -93,6 +92,7 @@
     <Compile Include="Enum\TextRedactors.cs" />
     <Compile Include="Model\Calculation.cs" />
     <Compile Include="Model\Data.cs" />
+    <Compile Include="Model\DataReader.cs" />
     <Compile Include="Model\MSWordWorker.cs" />
     <Compile Include="Model\NotificationEntity.cs" />
     <Compile Include="Model\OpenOfficeWorker.cs" />

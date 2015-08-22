@@ -107,7 +107,7 @@ namespace LaborathoryControl.Model
                 strText = System.Convert.ToString(data[i].Number);
                 oTable.Cell(r, 2).Range.Text = strText;
 
-                strText = System.Convert.ToString(data[i].Value);
+                strText = System.Convert.ToString(data[i].Value.Value);
                 oTable.Cell(r, 3).Range.Text = strText;
 
                 strText = System.Convert.ToString(data[i].Deviation);
@@ -116,7 +116,7 @@ namespace LaborathoryControl.Model
                 strText = System.Convert.ToString(data[i].SquaredDeviation);
                 oTable.Cell(r, 5).Range.Text = strText;
 
-                allsum += data[i].Value;
+                allsum += data[i].Value.Value;
             }
             oTable.Cell(22, 1).Range.Text = "";
             oTable.Cell(22, 2).Range.Text = "n=20";

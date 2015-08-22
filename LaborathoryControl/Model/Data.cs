@@ -7,8 +7,10 @@ namespace LaborathoryControl.Model
 {
     public class Data : NotificationEntity
     {
+        private static int counter;
+
         private int _number;
-        private double _value;
+        private double? _value;
         private double _deviation;
         private double _squaredDeviation;
 
@@ -25,7 +27,7 @@ namespace LaborathoryControl.Model
                 }
             }
         }
-        public double Value
+        public double? Value
         {
             get { return _value; }
             set
@@ -62,15 +64,25 @@ namespace LaborathoryControl.Model
             }
         }
 
-        public Data(int number)
+        static Data()
         {
-            Number = number;
+            counter = 1;
+        }
+
+        public Data()
+        {
+            Number = counter++;
+        }
+
+        public Data(double value)
+        {
+            Number = counter++;
+            this.Value = value;
         }
 
         public override bool Equals(object obj)
         {
-
-            return this.Value.Equals((obj as Data).Value);
+            return this.Value.Equals((obj as Data).Value.Value);
         }
 
         public override int GetHashCode()

@@ -10,8 +10,6 @@ namespace LaborathoryControl.Model
     {
         private ObservableCollection<Data> data;
 
-        private ObservableCollection<double> contr;
-
         private double _Average;
         private double _TMax;
         private double _TMin;
@@ -102,7 +100,7 @@ namespace LaborathoryControl.Model
             FactorOfVariation();
             TmaxCalculation();
             TminCalculation();
-            //ContrMap();
+            ContrMap();
         }
 
         private void AverageCalculation()
@@ -113,9 +111,9 @@ namespace LaborathoryControl.Model
             double sum = 0;
             foreach(Data elem in data)
             {
-                sum += elem.Value;
+                sum += elem.Value.Value;
             }
-            Average = sum / data.Count;
+            Average = Math.Round(sum / data.Count, 4);
         }
 
         private double Dispersion()
@@ -124,11 +122,12 @@ namespace LaborathoryControl.Model
             int negative = -1;
             for (int i = 0; i < data.Count; i++)
             {
-                data[i].Deviation = (Average - data[i].Value) * negative;
-                data[i].SquaredDeviation = Math.Pow((Average - data[i].Value), 2);
-                intermediate += Math.Pow((Average - data[i].Value), 2);
+                data[i].Deviation = (Average - data[i].Value.Value) * negative;
+                data[i].SquaredDeviation = Math.Round(Math.Pow((Average - data[i].Value.Value), 2), 4);
+                intermediate += data[i].SquaredDeviation;
             }
-            Variance = Math.Sqrt(intermediate / (data.Count - 1));
+            //Variance = Math.Round(Math.Sqrt(intermediate / data.Count), 4);
+            Variance = Math.Round(intermediate, 4);
             return Variance;
         }
 
@@ -150,7 +149,7 @@ namespace LaborathoryControl.Model
                 TMin = (Minimum() - Average) / Variance;
         }
 
-        private void ContrMap(ref double[] contrArray)
+        private void ContrMap()
         {
             for (int i = 1, j = 4; i < 4; i++)
             {
@@ -165,19 +164,19 @@ namespace LaborathoryControl.Model
             double maximum = 0;
             foreach(Data obj in data)
             {
-                if (maximum < obj.Value)
-                    maximum = obj.Value;
+                if (maximum < obj.Value.Value)
+                    maximum = obj.Value.Value;
             }
             return maximum;
         }
 
         private double Minimum()
         {
-            double min = data[0].Value;
+            double min = data[0].Value.Value;
             foreach(Data obj in data)
             {
                 if (obj.Value < min)
-                    min = obj.Value;
+                    min = obj.Value.Value;
             }
             return min;
         }
