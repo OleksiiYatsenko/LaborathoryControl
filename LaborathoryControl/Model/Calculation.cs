@@ -16,6 +16,8 @@ namespace LaborathoryControl.Model
         private double _Variation;
         private double _Variance;
         private double[] _contrArr;
+        private Data SumObject;
+
 
         public double Average
         {
@@ -94,13 +96,14 @@ namespace LaborathoryControl.Model
         {
             data = arr;
             ContrArr = new double[6];
-
+            SumObject = new Data();
             AverageCalculation();
             Dispersion();
             FactorOfVariation();
             TmaxCalculation();
             TminCalculation();
             ContrMap();
+            data.Add(SumObject);
         }
 
         private void AverageCalculation()
@@ -113,48 +116,49 @@ namespace LaborathoryControl.Model
             {
                 sum += elem.Value.Value;
             }
+            SumObject.Value = sum;
             Average = Math.Round(sum / data.Count, 4);
         }
 
-        private double Dispersion()
+        private void Dispersion()
         {
             double intermediate = 0;
-            int negative = -1;
             for (int i = 0; i < data.Count; i++)
             {
-                data[i].Deviation = (Average - data[i].Value.Value) * negative;
-                data[i].SquaredDeviation = Math.Round(Math.Pow((Average - data[i].Value.Value), 2), 4);
+                data[i].Deviation = Math.Round((Average - data[i].Value.Value), 4);
+                data[i].SquaredDeviation = Math.Round(Math.Pow(data[i].Deviation, 2), 4);
                 intermediate += data[i].SquaredDeviation;
             }
-            //Variance = Math.Round(Math.Sqrt(intermediate / data.Count), 4);
-            Variance = Math.Round(intermediate, 4);
-            return Variance;
+            SumObject.SquaredDeviation = intermediate;
+            double S = intermediate / 19;
+            S = Math.Sqrt(S);
+            Variance = Math.Round(S, 4);
         }
 
         private void FactorOfVariation()
         {
             if(Average != 0)
-                Variation = (Variance / Average) * 100;
+                Variation = Math.Round((Variance / Average) * 100, 2);
         }
 
         private void TmaxCalculation()
         {
             if(Variance != 0)
-                TMax = (Maximum() - Average) / Variance;
+                TMax = Math.Round((Maximum() - Average) / Variance, 4);
         }
 
         private void TminCalculation()
         {
             if(Variance != 0)
-                TMin = (Minimum() - Average) / Variance;
+                TMin = Math.Round((Minimum() - Average) / Variance, 4);
         }
 
         private void ContrMap()
         {
             for (int i = 1, j = 4; i < 4; i++)
             {
-                ContrArr[i - 1] = Average + i * Variance;
-                ContrArr[j - 1] = Average - i * Variance;
+                ContrArr[i - 1] = Math.Round(Average + i * Variance, 4);
+                ContrArr[j - 1] = Math.Round(Average - i * Variance, 4);
                 j++;
             }
         }

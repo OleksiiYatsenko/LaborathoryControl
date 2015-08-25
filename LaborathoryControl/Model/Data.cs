@@ -13,7 +13,17 @@ namespace LaborathoryControl.Model
         private double? _value;
         private double _deviation;
         private double _squaredDeviation;
+        private DateTime _date;
 
+        public DateTime Date
+        {
+            get { return _date; }
+            set
+            {
+                _date = value;
+                OnPropertyChanged();
+            }
+        }
         public int Number
         {
             get { return _number; }
@@ -78,16 +88,6 @@ namespace LaborathoryControl.Model
         {
             Number = counter++;
             this.Value = value;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return this.Value.Equals((obj as Data).Value.Value);
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
         }
     }
 }

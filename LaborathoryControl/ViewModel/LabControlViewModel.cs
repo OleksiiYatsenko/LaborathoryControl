@@ -58,10 +58,11 @@ namespace LaborathoryControl.ViewModel
 
         public LabControlViewModel()
         {
-            DataReader reader = new DataReader();
-            _quarterValues = new ObservableCollection<Data>(reader.Read());
-            //for (int i = 0; i < 20;)
-            //    QuarterValues.Add(new Data());
+            /*DataReader reader = new DataReader();
+            _quarterValues = new ObservableCollection<Data>(reader.Read());*/
+            _quarterValues = new ObservableCollection<Data>();
+            for (int i = 0; i < 20; i++)
+                QuarterValues.Add(new Data());
             StartCommand = new RelayCommand(Start);
             GenerateWordDocCommand = new RelayCommand(GenerateDoc);
             CloseCommand = new RelayCommand(Close);
@@ -77,9 +78,9 @@ namespace LaborathoryControl.ViewModel
         void GetPlotModel()
         {
             var series = new LineSeries { Title = "Данные по анализам", MarkerType = MarkerType.Circle };
-            foreach(Data d in QuarterValues)
+            for (int i = 0; i < QuarterValues.Count - 1; i++)
             {
-                series.Points.Add(new DataPoint(d.Number, d.Value.Value));
+                series.Points.Add(new DataPoint(QuarterValues[i].Number, QuarterValues[i].Value.Value));
             }
             PlotModel tmp = new PlotModel();
             tmp.Series.Add(series);
