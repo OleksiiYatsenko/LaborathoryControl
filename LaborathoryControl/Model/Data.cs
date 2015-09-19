@@ -13,17 +13,7 @@ namespace LaborathoryControl.Model
         private double? _value;
         private double _deviation;
         private double _squaredDeviation;
-        private DateTime _date;
 
-        public DateTime Date
-        {
-            get { return _date; }
-            set
-            {
-                _date = value;
-                OnPropertyChanged();
-            }
-        }
         public int Number
         {
             get { return _number; }

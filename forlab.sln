@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "forlab", "forlab\forlab.csproj", "{49A3E893-69DE-4162-9DBB-C04CDE8CC757}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaborathoryControl", "LaborathoryControl\LaborathoryControl.csproj", "{E4487008-E5B2-4D8B-8E62-C1815A59AE62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaborathoryControl.Tests", "LaborathoryControl.Tests\LaborathoryControl.Tests.csproj", "{1D7EC5CB-6EA0-495B-ADB7-1DE1640611E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,16 @@ Global
 		{E4487008-E5B2-4D8B-8E62-C1815A59AE62}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E4487008-E5B2-4D8B-8E62-C1815A59AE62}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E4487008-E5B2-4D8B-8E62-C1815A59AE62}.Release|x86.ActiveCfg = Release|Any CPU
+		{1D7EC5CB-6EA0-495B-ADB7-1DE1640611E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D7EC5CB-6EA0-495B-ADB7-1DE1640611E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D7EC5CB-6EA0-495B-ADB7-1DE1640611E9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1D7EC5CB-6EA0-495B-ADB7-1DE1640611E9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1D7EC5CB-6EA0-495B-ADB7-1DE1640611E9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1D7EC5CB-6EA0-495B-ADB7-1DE1640611E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D7EC5CB-6EA0-495B-ADB7-1DE1640611E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D7EC5CB-6EA0-495B-ADB7-1DE1640611E9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1D7EC5CB-6EA0-495B-ADB7-1DE1640611E9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1D7EC5CB-6EA0-495B-ADB7-1DE1640611E9}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

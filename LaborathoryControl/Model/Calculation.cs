@@ -116,7 +116,7 @@ namespace LaborathoryControl.Model
             {
                 sum += elem.Value.Value;
             }
-            SumObject.Value = sum;
+            SumObject.Value = Math.Round(sum, 4);
             Average = Math.Round(sum / data.Count, 4);
         }
 
@@ -129,7 +129,7 @@ namespace LaborathoryControl.Model
                 data[i].SquaredDeviation = Math.Round(Math.Pow(data[i].Deviation, 2), 4);
                 intermediate += data[i].SquaredDeviation;
             }
-            SumObject.SquaredDeviation = intermediate;
+            SumObject.SquaredDeviation = Math.Round(intermediate, 4);
             double S = intermediate / 19;
             S = Math.Sqrt(S);
             Variance = Math.Round(S, 4);
